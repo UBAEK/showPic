@@ -1,6 +1,3 @@
-/**
- * Created by liu on 2017/11/11.
- */
 function serialize(form) {
     var arrs=new Array();
         for(var i=0;i<form.elements.length;i++){
