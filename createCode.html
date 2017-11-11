@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #code{
+            display: inline-block;
+            color: gold;
+            background: saddlebrown;
+            letter-spacing: 2px;
+            padding: 2px;
+            position: relative;
+        }
+        #code span{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="inp" />
+    <div id="code" onclick="createCode()"></div>
+    <input type="button" value="验证" onclick="validate()"/>
+</body>
+<script>
+    var code;    //全局变量，验证码
+
+    //生成验证码
+    function createCode(length) {
+        code="";
+        //默认验证码长度为i，如果要改变就传参
+        var codeLength=length || 4;
+        var random=new Array(0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+        //开始随机生成数字
+        for(var i=0;i<codeLength;i++){
+            var index=Math.floor( Math.random()*36 );
+            code+=random[index];
+        }
+
+        //把生成的验证码放到div里面去
+        document.getElementById("code").innerHTML=code;
+    }
+    createCode();
+
+    function validate() {
+        //js严格区分大小写，因此我们全部统一为大写验证
+        var inpCode=document.getElementById("inp").value.toUpperCase();
+        if(inpCode.length<=0){
+            alert("请输入验证码");
+        }else if(inpCode!=code){
+            alert("验证码错误，请重新输入");
+            createCode();
+        }else{
+            alert("注册成功");
+        }
+    }
+</script>
+</html>
